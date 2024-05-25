@@ -1,6 +1,8 @@
+/* eslint-disable linebreak-style */
 import uuid from 'uuid';
 import Edge from './edge';
 import Node from './node';
+import config from '../../Config/conf.json';
 
 class Element {
   idCAM: string;
@@ -19,7 +21,7 @@ class Element {
   constructor() {
     this.idCAM = uuid.v4();
     this.creator = uuid.v4(); // id of the maker
-    this.date = new Date().getTime(); // representing the milliseconds elapsed between 1 January 1970 00:00:00 UTC and the given date
+    this.date = new Date().getTime();
     this.nodes = [];
     this.connectors = [];
     this.currentID = '';
@@ -32,7 +34,7 @@ class Element {
   }
 
   addElement(newElement: Node | Edge) {
-    const kind = newElement.getKind();
+    const { kind } = newElement;
     switch (kind) {
       case 'Node':
         this.addNode(newElement as Node);
@@ -56,8 +58,6 @@ class Element {
         }
         break;
     }
-
-    this.draw();
   }
 
   deleteElement(): boolean {
@@ -72,7 +72,7 @@ class Element {
   }
 
   addConnector(connector: Edge): boolean {
-    if (this.isConnectorIn(connector) == false) {
+    if (this.isConnectorIn(connector) === false) {
       if (config.BidirectionalDefault) {
         connector.setBidirectional(true);
       }
@@ -86,7 +86,7 @@ class Element {
 
   isConnectorIn(connector: Edge): boolean {
     const st = this.findConnector(connector);
-    if (st == undefined) return false;
+    if (st === undefined) return false;
     return true;
   }
 
@@ -108,7 +108,6 @@ class Element {
 
   deleteConnector(): boolean {
     if (!this.currentConnector.getIsDeletable()) {
-      console.log('This element cannot be deleted.');
       return false;
     }
     this.currentConnector.deleteConnection();
@@ -123,21 +122,17 @@ class Element {
   addNode(node: Node): boolean {
     const elt = this.getNodeById(node.id);
     if (elt != null) {
-      console.log('Already existing element.');
       return false;
     }
     this.nodes.push(node);
-    console.log('Node has been added.');
     return true;
   }
 
   deleteNode(): boolean {
-    const nodeID = this.currentNode.id;
-
-    if (!this.currentNode.getIsDeletable()) {
-      console.log('This element cannot be deleted.');
+    if (!this.currentNode.isDeletable) {
       return false;
     }
+    const nodeID = this.currentNode.id;
 
     this.connectors.forEach((connector) => {
       if (connector.target === nodeID || connector.source === nodeID) {
@@ -171,7 +166,7 @@ class Element {
   selecteNode(id: string): void {
     const index = this.getIndex(id, 'Node');
     if (!index) return;
-    if (this.currentNode != null && this.nodes[index].id != this.currentNode.id) {
+    if (this.currentNode != null && this.nodes[index].id !== this.currentNode.id) {
       const connector = new Edge();
       connector.establishConnection(this.currentNode.id, this.nodes[index].id, 1, true);
       this.addElement(connector);
@@ -186,9 +181,7 @@ class Element {
   }
 
   unselectNode(): void {
-    this.nodes.map((node) => {
-      node.updateNode('selected', false);
-    });
+    this.nodes.map((node) => node.updateNode('selected', false));
     this.currentNode = {} as Node;
     this.currentID = '';
     this.hasSelectedNode = false;
@@ -233,19 +226,10 @@ class Element {
 
   importElement(element: Node | Edge) {
     if (element.kind === 'Node') {
-      const node = new Node(
-        0,
-        '',
-        {
-          x: 0,
-          y: 0,
-        },
-        false,
-        false
-      );
+      const node = {} as Node;
       node.setNodeImport(element as Node);
-      console.log('A node has been imported.');
       this.nodes.push(node);
+      return;
     }
 
     if (element.kind === 'Connector') {

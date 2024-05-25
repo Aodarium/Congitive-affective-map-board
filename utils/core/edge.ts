@@ -1,5 +1,5 @@
+/* eslint-disable linebreak-style */
 import uuid from 'uuid';
-import Node from './node';
 
 /**
  * Brief description of the class here
@@ -37,6 +37,7 @@ class Edge {
     this.isOver = false;
     this.isBidirectional = true;
     this.eventLog = [];
+    this.shape = 'neutral';
   }
 
   setValue(newValue: number) {
@@ -99,7 +100,7 @@ class Edge {
   setShape() {
     if (this.value < 0) this.shape = 'negative';
     if (this.value > 0) this.shape = 'positive';
-    if (this.value == 0) this.shape = 'neutral';
+    if (this.value === 0) this.shape = 'neutral';
   }
 
   updateConnector(field: string, value: any) {
