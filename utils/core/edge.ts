@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
 import uuid from 'uuid';
+import { Log } from './types';
 
 /**
  * Brief description of the class here
@@ -19,7 +20,7 @@ class Edge {
   isDeletable: boolean;
   isOver: boolean;
   isBidirectional: boolean;
-  eventLog: never[];
+  eventLog: Log[];
   shape: string;
 
   constructor(isDeletable = true) {
@@ -167,7 +168,6 @@ class Edge {
     });
 
     this.isActive = false;
-    console.log('The connection has been destroyed.');
     return true;
   }
 
@@ -176,7 +176,7 @@ class Edge {
       time: new Date().getTime(),
       type: log.type,
       value: log.value,
-    });
+    } as Log);
   }
 }
 

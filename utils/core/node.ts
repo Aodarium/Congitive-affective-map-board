@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
 import uuid from 'uuid';
+import { Log } from './types';
 
 class Node {
   id: string;
@@ -15,7 +16,7 @@ class Node {
   isDraggable: boolean;
   isDeletable: boolean;
   hasElementMoved: boolean;
-  eventLog: never[];
+  eventLog: Log[];
   isTextChangeable: boolean;
 
   constructor(
@@ -98,6 +99,7 @@ class Node {
   }
 
   updateNode(field: string, value: boolean) {
+    this.enterLog({ type: field, value });
     if (field === 'text') this.setText(value as unknown as string);
     if (field === 'position') this.setPosition(value as unknown as object);
     if (field === 'value') this.setValue(value as unknown as number);
@@ -107,12 +109,12 @@ class Node {
     if (field === 'connector') this.setIsConnectorSelected(value as unknown as boolean);
   }
 
-  enterLog(log: object) {
+  enterLog(log: { type: any; value: any }) {
     this.eventLog.push({
       time: new Date().getTime(),
       type: log.type,
       value: log.value,
-    });
+    } as Log);
   }
 
   deletenode() {
