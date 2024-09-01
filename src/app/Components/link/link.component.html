@@ -1,1 +1,20 @@
-<p>link works!</p>
+<svg>
+	<g>
+		<svg:line
+			[attr.x1]="source.position.x + offset.x + 100"
+			[attr.y1]="source.position.y + offset.y + 50"
+			[attr.x2]="target.position.x + offset.x + 100"
+			[attr.y2]="target.position.y + offset.y + 50"
+			stroke="grey"
+			stroke-width="10"
+		/>
+		<svg:line
+			[attr.x1]="source.position.x + offset.x + 100"
+			[attr.y1]="source.position.y + offset.y + 50"
+			[attr.x2]="target.position.x + offset.x + 100"
+			[attr.y2]="target.position.y + offset.y + 50"
+			stroke="black"
+			stroke-width="2"
+		/>
+	</g>
+</svg>

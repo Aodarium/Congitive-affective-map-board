@@ -5,6 +5,14 @@
 		(offsetEmitter)="offsetEmitter($event)"
 	></g>
 	<g
+		*ngFor="let edge of currentData.edges"
+		app-link
+		[sourceId]="edge.source"
+		[targetId]="edge.target"
+		[offset]="offset"
+		[edge]="edge"
+	></g>
+	<g
 		*ngFor="let node of currentData.nodes"
 		app-node
 		[offset]="offset"
