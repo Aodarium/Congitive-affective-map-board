@@ -1,0 +1,13 @@
+<svg class="board">
+	<g
+		app-background
+		[offset]="offset"
+		(offsetEmitter)="offsetEmitter($event)"
+	></g>
+	<g
+		*ngFor="let node of currentData.nodes"
+		app-node
+		[offset]="offset"
+		[node]="node"
+	></g>
+</svg>

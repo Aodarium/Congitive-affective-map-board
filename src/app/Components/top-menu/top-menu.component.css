@@ -1,0 +1,23 @@
+.main {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid ;
+    border-radius: 50px;
+}
+
+span {
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    opacity: 0.5;
+}
+span:hover{
+    opacity: 1;
+}
