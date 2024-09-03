@@ -44,6 +44,10 @@ export class BackgroundComponent {
       element.selected = false;
       return element;
     });
+    data.edges.map((element:any) => {
+      element.selected = false;
+      return element;
+    });
   }
   @HostListener('dblclick', ['$event'])
   clickEvent(event:any):void {

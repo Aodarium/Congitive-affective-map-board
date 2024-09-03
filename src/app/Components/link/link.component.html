@@ -6,15 +6,17 @@
 			[attr.x2]="target.position.x + offset.x + 100"
 			[attr.y2]="target.position.y + offset.y + 50"
 			stroke="grey"
-			stroke-width="10"
+			opacity="0.1"
+			stroke-width="20"
 		/>
 		<svg:line
+			[class]="isSelected ? 'selected' : 'none'"
 			[attr.x1]="source.position.x + offset.x + 100"
 			[attr.y1]="source.position.y + offset.y + 50"
 			[attr.x2]="target.position.x + offset.x + 100"
 			[attr.y2]="target.position.y + offset.y + 50"
 			stroke="black"
-			stroke-width="2"
+			stroke-width="5"
 		/>
 	</g>
 </svg>

@@ -1,5 +1,6 @@
 import { Component, HostListener, Input } from '@angular/core';
 import { data } from '../../core/data';
+import { Toto } from '../../core/element';
 
 @Component({
   selector: 'g[app-node]',
@@ -42,6 +43,7 @@ export class NodeComponent {
   @HostListener('mousedown', ['$event'])
   mouseDown(event:any) {
     this.isMouseDown = true;
+    new Toto().selecteNode(this.node.id);
     data.nodes.map((element:any) => {
       if (element.id === this.node.id) element.selected = true;
       else element.selected = false;

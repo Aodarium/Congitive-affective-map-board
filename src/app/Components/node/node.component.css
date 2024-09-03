@@ -1,0 +1,9 @@
+.selected{
+    stroke: black;
+    transition: stroke ;
+    transition-duration: 100ms;
+    filter: drop-shadow(3px 5px 2px rgba(6, 2, 255, 0.874));
+}
+.not-selected{
+    stroke: black;
+}
